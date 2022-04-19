@@ -1,6 +1,8 @@
+# import needed packages
 import mysql.connector
 from mysql.connector import errorcode
 
+# Create the config varable with connection data
 config = {
     "user": "pysports_user",
     "password": "MySQL8IsGreat!",
@@ -9,6 +11,7 @@ config = {
     "raise_on_warnings": True
 }
 
+# Create the DB connection and print results
 try:
     db = mysql.connector.connect(**config)
 
@@ -16,6 +19,7 @@ try:
 
     input("\n\n Press any key to continue")
 
+# If connection errors, print error
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("   The supplied username or password are invalid")
@@ -26,5 +30,6 @@ except mysql.connector.Error as err:
     else:
         print(err)
 
+# Whether or not the connection works, close the DB connection
 finally:
     db.close()
